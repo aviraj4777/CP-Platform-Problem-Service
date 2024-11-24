@@ -6,6 +6,9 @@ async function connectToDB() {
         if (NODE_ENV == 'development') {
             await mongoose.connect(ATLAS_DB_URL);
         }
+        // else if (NODE_ENV == 'production') {
+        //     await mongoose.connect("some other URL");
+        // }
     } catch(error) {
         console.log('Unable to connect to the DB server');
         console.log(error);
