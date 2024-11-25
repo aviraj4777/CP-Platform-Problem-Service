@@ -7,7 +7,7 @@ class ProblemService {
     this.problemRepository = problemRepository;
   }
 
-// Here we dont need error handling explicitly unless it is required, since the error handling has already been done in problemRepository class.
+  // Here we dont need error handling explicitly unless it is required, since the error handling has already been done in problemRepository class.
   async createProblem(problemData) {
     // 1. Sanitize the markdown for description
     problemData.description = sanitizeMarkdownContent(problemData.description);
@@ -18,6 +18,17 @@ class ProblemService {
   async getAllProblems() {
     const problems = await this.problemRepository.getAllProblems();
     return problems;
+  }
+  async getProblem(id) {
+    const problem = await this.problemRepository.getProblem(id);
+    return problem;
+  }
+  async deleteProblem(id) {
+    const res = await this.problemRepository.deleteProblem(id);
+    return res;
+  }
+  async updateProblem(id, update) {
+    return await this.problemRepository.updateProblem(id, update);
   }
 }
 
