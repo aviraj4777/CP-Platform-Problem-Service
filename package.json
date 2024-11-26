@@ -18,6 +18,8 @@
     "mongoose": "^8.8.2",
     "nodemon": "^3.1.6",
     "sanitize-html": "^2.13.1",
-    "turndown": "^7.2.0"
+    "turndown": "^7.2.0",
+    "winston": "^3.17.0",
+    "winston-mongodb": "^6.0.0"
   }
 }
