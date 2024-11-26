@@ -1,5 +1,6 @@
 const NotFound = require("../errors/notFound.error");
 const { Problem } = require("../models");
+const logger = require("../config/logger.config");
 
 class ProblemRepository {
   async createProblem(problemData) {
@@ -39,7 +40,12 @@ class ProblemRepository {
   async deleteProblem(id) {
     try {
       const res = await Problem.deleteOne({ _id: id });
-      if (!res.deletedCount) throw new NotFound("Problem", id);
+      if (!res.deletedCount) {
+        // logger.error(
+        //   `Problem.Repository: Problem with id: ${id} not found in the db`
+        // );
+        throw new NotFound("Problem", id);
+      }
     } catch (error) {
       console.log(error);
       throw error;
@@ -48,7 +54,9 @@ class ProblemRepository {
   async updateProblem(id, update) {
     try {
       const oldDoc = await Problem.findById(id);
-      if (!oldDoc) throw new NotFound("Problem", id);
+      if (!oldDoc) {
+        throw new NotFound("Problem", id);
+      }
       for (const key in update) {
         oldDoc[key] = update[key];
       }
